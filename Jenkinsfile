@@ -24,8 +24,10 @@ pipeline
             echo "Pushing to Docker hub"
             withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass1', usernameVariable: 'user1')]) {
             sh 'docker login -u $user1 -p $pass1'
-            sh 'docker push ankushwalia/nodeapp:${DOCKER_TAG}'
-
+            withCredentials([usernamePassword(credentialsId: 'aw1234', passwordVariable: 'pass1', usernameVariable: 'user1')])
+             {
+                  sh 'echo $pass1 | sudo -kS docker push ankush56/nodeapp:${DOCKER_TAG}'
+             }
           }
           }
         }
