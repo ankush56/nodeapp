@@ -14,7 +14,6 @@ pipeline
             withCredentials([usernamePassword(credentialsId: 'aw1234', passwordVariable: 'pass1', usernameVariable: 'user1')])
              {
                 sh 'echo $pass1 | sudo -kS docker build -t ankush56/nodeapp:${DOCKER_TAG} .'
-                sh 'docker push ankush56/nodeapp:${DOCKER_TAG}'
              }
           }
         }
@@ -25,6 +24,7 @@ pipeline
             echo "Pushing to Docker hub"
             withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass1', usernameVariable: 'user1')]) {
             sh 'docker login -u $user1 -p $pass1'
+            sh 'docker push ankush56/nodeapp:${DOCKER_TAG}'
 
           }
           }
