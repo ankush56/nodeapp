@@ -37,10 +37,10 @@ pipeline
             echo "Deploying to K8s now"
             withCredentials([usernamePassword(credentialsId: 'aw1234', passwordVariable: 'pass1', usernameVariable: 'user1')])
              {
-                  sh 'echo $pass1 | sudo chmod + x changeTag.sh ${DOCKER_TAG}'
+                  sh 'echo $pass1 | sudo chmod + x ~/repos/nodeapp/changeTag.sh ${DOCKER_TAG}'
                   sh './changeTag.sh ${DOCKER_TAG}'
                   sh """
-                  sshpass -p $pass1 scp -P 22 services.yaml nodeapp.yaml aw@192.168.1.102:~/
+                  sshpass -p $pass1 scp -P 22 ~/repos/nodeapp/services.yaml ~/repos/nodeapp/nodeapp.yaml aw@192.168.1.102:~/
                   sshpass -p $pass1 ssh $user1@192.168.1.102 '
                   script {
                     try {
