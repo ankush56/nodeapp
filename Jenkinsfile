@@ -40,9 +40,9 @@ pipeline
                   sh 'echo pwd'
                   sh 'whoami'
                   sh 'echo $pass1 | sudo -kS chmod +x changeTag.sh'
-                  sh './~/repos/nodeapp/changeTag.sh ${DOCKER_TAG}'
+                  sh './changeTag.sh ${DOCKER_TAG}'
                   sh """
-                  sshpass -p $pass1 scp -P 22 ~/repos/nodeapp/services.yaml ~/repos/nodeapp/nodeapp.yaml aw@192.168.1.102:~/
+                  sshpass -p $pass1 scp -P 22 services.yaml nodeapp.yaml aw@192.168.1.102:~/
                   sshpass -p $pass1 ssh $user1@192.168.1.102 '
                   script {
                     try {
