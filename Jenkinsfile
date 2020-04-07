@@ -37,7 +37,7 @@ pipeline
             echo "Deploying to K8s now"
             withCredentials([usernamePassword(credentialsId: 'aw1234', passwordVariable: 'pass1', usernameVariable: 'user1')])
              {
-                  sh 'chmod +x ~/repos/nodeapp/changeTag.sh'
+                  sh 'echo $pass1 | sudo -kS chmod +x ~/repos/nodeapp/changeTag.sh'
                   sh './~/repos/nodeapp/changeTag.sh ${DOCKER_TAG}'
                   sh """
                   sshpass -p $pass1 scp -P 22 ~/repos/nodeapp/services.yaml ~/repos/nodeapp/nodeapp.yaml aw@192.168.1.102:~/
