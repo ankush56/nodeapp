@@ -42,7 +42,7 @@ pipeline
                   sh 'echo $pass1 | sudo -kS chmod +x changeTag.sh'
                   sh './changeTag.sh ${DOCKER_TAG}'
                   sh """
-                  sshpass -p $pass1 scp o StrictHostKeyChecking=no -P 22 services.yaml nodeapp.yaml aw@192.168.1.102:~/
+                  sshpass -p $pass1 scp -o StrictHostKeyChecking=no -P 22 services.yaml nodeapp.yaml aw@192.168.1.102:~/
                   sshpass -p $pass1 ssh $user1@192.168.1.102 '
                   script {
                     try {
