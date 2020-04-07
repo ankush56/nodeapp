@@ -40,7 +40,7 @@ pipeline
             withCredentials([usernamePassword(credentialsId: 'aw1234', passwordVariable: 'pass1', usernameVariable: 'user1')])
              {
                   sh 'echo $pass1 | sudo -kS docker tag ankush56/nodeapp:${DOCKER_TAG} localhost:32000/nodeapp:${DOCKER_TAG}:registry'
-                  sh 'echo $pass1 | sudo -kS docker push localhost:32000/nodeapp:${DOCKER_TAG}'
+                  sh 'echo $pass1 | sudo -kS docker push localhost:32000/nodeapp:${DOCKER_TAG}:registry'
              }
           }
         }
