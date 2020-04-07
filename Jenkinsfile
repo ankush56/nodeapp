@@ -32,18 +32,6 @@ pipeline
           }
           }
         }
-        stage ('Pushing image to microk8s registry')
-        {
-          steps
-          {
-            echo "Pushing image to microk8s registry"
-            withCredentials([usernamePassword(credentialsId: 'aw1234', passwordVariable: 'pass1', usernameVariable: 'user1')])
-             {
-                  sh 'echo $pass1 | sudo -kS docker tag ankush56/nodeapp:${DOCKER_TAG} localhost:32000/nodeapp:${DOCKER_TAG}:registry'
-                  sh 'echo $pass1 | sudo -kS docker push localhost:32000/nodeapp:${DOCKER_TAG}:registry'
-             }
-          }
-        }
         stage('Deploy to K8') {
           steps {
             echo "Deploying to K8s now"
@@ -53,7 +41,7 @@ pipeline
                   sh './changeTag.sh ${DOCKER_TAG}'
                   sh """
                   sshpass -p $pass1 scp -P 22 services.yaml nodeapp.yaml aw@192.168.1.102:~/
-                  sshpass -p $pass1 ssh $user1@138.91.160.89 '
+                  sshpass -p $pass1 ssh $user1@192.168.1.102 '
                   script {
                     try {
                        echo $pass1 | sudo -kS microk8s kubectl apply -f .

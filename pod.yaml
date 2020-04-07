@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: nodeapp
-      image: localhost:32000/nodeapp:tagVersion:registry
+      image: ankushwalia/nodeapp:tagVersion
       ports:
         - containerPort: 8080
